@@ -1,0 +1,15 @@
+namespace: ecostream
+resources:
+  - ../../base
+patches:
+  - target:
+      kind: Deployment
+      name: ecostream-app
+    patch: |-
+      - op: replace
+        path: /spec/replicas
+        value: 3
+images:
+  - name: REPLACE_ME_ECR_IMAGE
+    newName: REPLACE_ME_ECR_IMAGE
+    newTag: staging-latest

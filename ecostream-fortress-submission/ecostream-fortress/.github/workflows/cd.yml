@@ -1,0 +1,35 @@
+name: CD (EKS) — Template (OIDC + kubectl)
+
+on:
+  workflow_dispatch:
+    inputs:
+      environment:
+        description: "Target environment"
+        required: true
+        default: "prod"
+        type: choice
+        options: [ "dev", "staging", "prod" ]
+
+permissions:
+  id-token: write
+  contents: read
+
+env:
+  AWS_REGION: ap-south-1
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Configure AWS credentials (OIDC)
+        uses: aws-actions/configure-aws-credentials@v4
+        with:
+          role-to-assume: ${{ secrets.AWS_OIDC_ROLE_ARN }}
+          aws-region: ${{ env.AWS_REGION }}
+
+      - name: Deploy to EKS (example)
+        run: |
+          echo "kubectl apply -k k8s/overlays/${{ inputs.environment }}"
+          echo "In production, use gated approvals and canary/blue-green rollout tooling (e.g., Argo Rollouts)."

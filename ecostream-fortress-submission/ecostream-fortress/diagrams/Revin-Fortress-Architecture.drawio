@@ -1,0 +1,161 @@
+<mxfile host="app.diagrams.net" modified="2026-03-02T13:40:00.000Z" agent="ChatGPT" version="20.8.16">
+  <diagram id="revin-eks-clean" name="Revin Fortress — EKS (Clean Professional Layout)">
+    <mxGraphModel dx="1600" dy="1000" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1600" pageHeight="1000">
+      <root>
+        <mxCell id="0"/>
+        <mxCell id="1" parent="0"/>
+
+        <!-- Title -->
+        <mxCell id="title" value="Revin Fortress — Multi-Environment, Automated, Secure (AWS Reference Architecture)" style="text;html=1;strokeColor=none;fillColor=none;fontSize=18;fontStyle=1;align=center;verticalAlign=middle;" vertex="1" parent="1">
+          <mxGeometry x="80" y="20" width="1440" height="30" as="geometry"/>
+        </mxCell>
+
+        <!-- Outer container -->
+        <mxCell id="outer" value="" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#eef5ff;strokeColor=#1f6feb;strokeWidth=3;" vertex="1" parent="1">
+          <mxGeometry x="70" y="70" width="1460" height="820" as="geometry"/>
+        </mxCell>
+
+        <!-- Shared services band -->
+        <mxCell id="sharedband" value="" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#1f6feb;strokeWidth=2;" vertex="1" parent="1">
+          <mxGeometry x="110" y="95" width="1380" height="160" as="geometry"/>
+        </mxCell>
+
+        <mxCell id="sharedlabel" value="Shared Services (CI/CD, IaC, Guardrails)" style="text;html=1;strokeColor=none;fillColor=none;fontSize=12;fontStyle=1;align=left;verticalAlign=middle;" vertex="1" parent="1">
+          <mxGeometry x="120" y="100" width="600" height="20" as="geometry"/>
+        </mxCell>
+
+        <!-- Shared boxes -->
+        <mxCell id="devrepo" value="Developers&#10;GitHub Repo" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#6b7280;strokeWidth=1.5;" vertex="1" parent="1">
+          <mxGeometry x="140" y="135" width="200" height="90" as="geometry"/>
+        </mxCell>
+
+        <mxCell id="gha" value="GitHub Actions&#10;CI: test + scan + build&#10;CD: promote + deploy" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#eaffea;strokeColor=#22c55e;strokeWidth=2;" vertex="1" parent="1">
+          <mxGeometry x="370" y="125" width="260" height="110" as="geometry"/>
+        </mxCell>
+
+        <mxCell id="ecr" value="Amazon ECR&#10;Immutable images&#10;tags: dev / staging / prod" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fff3e6;strokeColor=#f59e0b;strokeWidth=2;" vertex="1" parent="1">
+          <mxGeometry x="660" y="125" width="260" height="110" as="geometry"/>
+        </mxCell>
+
+        <mxCell id="tf" value="Terraform IaC&#10;Remote state + locking&#10;Per-env stacks" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffe7f1;strokeColor=#ec4899;strokeWidth=2;" vertex="1" parent="1">
+          <mxGeometry x="950" y="125" width="240" height="110" as="geometry"/>
+        </mxCell>
+
+        <mxCell id="guard" value="Guardrails&#10;AWS Organizations + SCP&#10;Least-Privilege IAM&#10;No Admin for humans" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffeaea;strokeColor=#ef4444;strokeWidth=2;" vertex="1" parent="1">
+          <mxGeometry x="1210" y="125" width="260" height="110" as="geometry"/>
+        </mxCell>
+
+        <!-- Environment band -->
+        <mxCell id="envband" value="" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f3f7ff;strokeColor=#1f6feb;strokeWidth=2;" vertex="1" parent="1">
+          <mxGeometry x="110" y="280" width="1380" height="580" as="geometry"/>
+        </mxCell>
+
+        <!-- DEV container -->
+        <mxCell id="dev" value="" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f0fff0;strokeColor=#22c55e;strokeWidth=2;" vertex="1" parent="1">
+          <mxGeometry x="150" y="320" width="470" height="520" as="geometry"/>
+        </mxCell>
+        <mxCell id="devlabel" value="DEV (isolated)" style="text;html=1;strokeColor=none;fillColor=none;fontSize=12;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="165" y="330" width="200" height="20" as="geometry"/>
+        </mxCell>
+
+        <!-- PROD container -->
+        <mxCell id="prod" value="" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fff2f2;strokeColor=#ef4444;strokeWidth=2;" vertex="1" parent="1">
+          <mxGeometry x="660" y="320" width="790" height="520" as="geometry"/>
+        </mxCell>
+        <mxCell id="prodlabel" value="PROD (isolated)" style="text;html=1;strokeColor=none;fillColor=none;fontSize=12;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="675" y="330" width="200" height="20" as="geometry"/>
+        </mxCell>
+
+        <mxCell id="perimeter" value="Perimeter: Only ALB is public • EKS nodes/pods + DB are private • No SSH (SSM only)" style="text;html=1;strokeColor=none;fillColor=none;fontSize=11;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="680" y="350" width="760" height="20" as="geometry"/>
+        </mxCell>
+
+        <!-- DEV inner blocks -->
+        <mxCell id="dev_alb" value="Public Subnets&#10;ALB" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fff3d6;strokeColor=#f59e0b;strokeWidth=2;" vertex="1" parent="1">
+          <mxGeometry x="185" y="380" width="170" height="80" as="geometry"/>
+        </mxCell>
+
+        <mxCell id="dev_eks" value="Private App Subnets&#10;EKS Cluster + Managed Node Group&#10;No Public IP" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#eaf7ea;strokeColor=#22c55e;strokeWidth=2;" vertex="1" parent="1">
+          <mxGeometry x="385" y="370" width="205" height="100" as="geometry"/>
+        </mxCell>
+
+        <mxCell id="dev_db" value="Private DB Subnets&#10;RDS PostgreSQL (Multi-AZ)&#10;Encrypted + Backups" style="shape=cylinder;whiteSpace=wrap;html=1;boundedLbl=1;fillColor=#e8ddff;strokeColor=#7c3aed;strokeWidth=2;" vertex="1" parent="1">
+          <mxGeometry x="290" y="485" width="220" height="95" as="geometry"/>
+        </mxCell>
+
+        <mxCell id="dev_sm" value="Secrets Manager&#10;DB creds only" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fff3d6;strokeColor=#f59e0b;strokeWidth=2;" vertex="1" parent="1">
+          <mxGeometry x="200" y="620" width="180" height="70" as="geometry"/>
+        </mxCell>
+
+        <mxCell id="dev_cw" value="CloudWatch&#10;Logs + Alarms" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#e8f0ff;strokeColor=#3b82f6;strokeWidth=2;" vertex="1" parent="1">
+          <mxGeometry x="400" y="620" width="180" height="70" as="geometry"/>
+        </mxCell>
+
+        <!-- PROD inner blocks -->
+        <mxCell id="prod_edge" value="Public Subnets (2 AZ)&#10;ALB + WAF" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fff3d6;strokeColor=#f59e0b;strokeWidth=2;" vertex="1" parent="1">
+          <mxGeometry x="710" y="395" width="210" height="85" as="geometry"/>
+        </mxCell>
+
+        <mxCell id="prod_eks" value="Private App Subnets (2 AZ)&#10;EKS Cluster + Node Groups&#10;HPA + Cluster Autoscaler" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#eaf7ea;strokeColor=#22c55e;strokeWidth=2;" vertex="1" parent="1">
+          <mxGeometry x="950" y="390" width="270" height="95" as="geometry"/>
+        </mxCell>
+
+        <mxCell id="prod_jobs" value="One-off Tasks&#10;DB migrations Job&#10;Smoke tests" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f0fff0;strokeColor=#22c55e;strokeWidth=2;" vertex="1" parent="1">
+          <mxGeometry x="1250" y="390" width="180" height="95" as="geometry"/>
+        </mxCell>
+
+        <mxCell id="prod_sm" value="Secrets Manager&#10;Rotation-ready&#10;No .env on servers" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fff3d6;strokeColor=#f59e0b;strokeWidth=2;" vertex="1" parent="1">
+          <mxGeometry x="710" y="525" width="220" height="85" as="geometry"/>
+        </mxCell>
+
+        <mxCell id="prod_s3" value="S3 (optional)&#10;ALB access logs" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#9ca3af;strokeWidth=2;" vertex="1" parent="1">
+          <mxGeometry x="710" y="635" width="220" height="70" as="geometry"/>
+        </mxCell>
+
+        <mxCell id="prod_db" value="Private DB Subnets (2 AZ)&#10;RDS PostgreSQL (Multi-AZ)&#10;PITR + Snapshots" style="shape=cylinder;whiteSpace=wrap;html=1;boundedLbl=1;fillColor=#e8ddff;strokeColor=#7c3aed;strokeWidth=2;" vertex="1" parent="1">
+          <mxGeometry x="960" y="520" width="250" height="100" as="geometry"/>
+        </mxCell>
+
+        <mxCell id="prod_obs" value="Observability&#10;CloudWatch dashboards&#10;Alarms: 5XX/Latency/CPU/Storage" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#e8f0ff;strokeColor=#3b82f6;strokeWidth=2;" vertex="1" parent="1">
+          <mxGeometry x="1250" y="530" width="180" height="90" as="geometry"/>
+        </mxCell>
+
+        <mxCell id="prod_dr" value="DR Pattern&#10;Multi-AZ failover (automatic)&#10;PITR restore to new instance (manual)&#10;Optional cross-region snapshots" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffeaea;strokeColor=#ef4444;strokeWidth=2;" vertex="1" parent="1">
+          <mxGeometry x="950" y="655" width="480" height="90" as="geometry"/>
+        </mxCell>
+
+        <!-- Legend -->
+        <mxCell id="legend" value="Legend&#10;Solid arrows: user traffic&#10;Dashed arrows: CI/CD, secrets, telemetry, migrations" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#9ca3af;strokeWidth=2;align=center;" vertex="1" parent="1">
+          <mxGeometry x="110" y="875" width="420" height="60" as="geometry"/>
+        </mxCell>
+
+        <!-- Arrows: Shared flow -->
+        <mxCell id="a1" style="edgeStyle=orthogonalEdgeStyle;endArrow=block;strokeWidth=2;" edge="1" parent="1" source="devrepo" target="gha"><mxGeometry relative="1" as="geometry"/></mxCell>
+        <mxCell id="a2" style="edgeStyle=orthogonalEdgeStyle;endArrow=block;strokeWidth=2;" edge="1" parent="1" source="gha" target="ecr"><mxGeometry relative="1" as="geometry"/></mxCell>
+        <mxCell id="a3" style="edgeStyle=orthogonalEdgeStyle;endArrow=block;strokeWidth=2;" edge="1" parent="1" source="ecr" target="tf"><mxGeometry relative="1" as="geometry"/></mxCell>
+        <mxCell id="a4" style="edgeStyle=orthogonalEdgeStyle;endArrow=block;strokeWidth=2;dashed=1;" edge="1" parent="1" source="tf" target="guard"><mxGeometry relative="1" as="geometry"/></mxCell>
+
+        <!-- Dashed deploy arrows -->
+        <mxCell id="ddev" value="Deploy Dev" style="edgeStyle=orthogonalEdgeStyle;endArrow=block;dashed=1;" edge="1" parent="1" source="gha" target="dev_eks"><mxGeometry relative="1" as="geometry"/></mxCell>
+        <mxCell id="dprod" value="Promote + Deploy Prod (gated)" style="edgeStyle=orthogonalEdgeStyle;endArrow=block;dashed=1;" edge="1" parent="1" source="gha" target="prod_eks"><mxGeometry relative="1" as="geometry"/></mxCell>
+
+        <!-- DEV arrows -->
+        <mxCell id="devt1" style="edgeStyle=orthogonalEdgeStyle;endArrow=block;strokeWidth=2;" edge="1" parent="1" source="dev_alb" target="dev_eks"><mxGeometry relative="1" as="geometry"/></mxCell>
+        <mxCell id="devt2" style="edgeStyle=orthogonalEdgeStyle;endArrow=block;strokeWidth=2;" edge="1" parent="1" source="dev_eks" target="dev_db"><mxGeometry relative="1" as="geometry"/></mxCell>
+        <mxCell id="devs1" style="edgeStyle=orthogonalEdgeStyle;endArrow=open;dashed=1;" edge="1" parent="1" source="dev_eks" target="dev_sm"><mxGeometry relative="1" as="geometry"/></mxCell>
+        <mxCell id="devs2" style="edgeStyle=orthogonalEdgeStyle;endArrow=open;dashed=1;" edge="1" parent="1" source="dev_eks" target="dev_cw"><mxGeometry relative="1" as="geometry"/></mxCell>
+
+        <!-- PROD arrows -->
+        <mxCell id="pt1" value="Forward" style="edgeStyle=orthogonalEdgeStyle;endArrow=block;strokeWidth=2;" edge="1" parent="1" source="prod_edge" target="prod_eks"><mxGeometry relative="1" as="geometry"/></mxCell>
+        <mxCell id="pt2" value="SG allow only from App" style="edgeStyle=orthogonalEdgeStyle;endArrow=block;strokeWidth=2;" edge="1" parent="1" source="prod_eks" target="prod_db"><mxGeometry relative="1" as="geometry"/></mxCell>
+        <mxCell id="ps1" style="edgeStyle=orthogonalEdgeStyle;endArrow=open;dashed=1;" edge="1" parent="1" source="prod_eks" target="prod_sm"><mxGeometry relative="1" as="geometry"/></mxCell>
+        <mxCell id="ps2" style="edgeStyle=orthogonalEdgeStyle;endArrow=open;dashed=1;" edge="1" parent="1" source="prod_edge" target="prod_obs"><mxGeometry relative="1" as="geometry"/></mxCell>
+        <mxCell id="ps3" style="edgeStyle=orthogonalEdgeStyle;endArrow=open;dashed=1;" edge="1" parent="1" source="prod_db" target="prod_obs"><mxGeometry relative="1" as="geometry"/></mxCell>
+
+        <mxCell id="pm1" value="Run migrations before traffic shift" style="edgeStyle=orthogonalEdgeStyle;endArrow=block;dashed=1;" edge="1" parent="1" source="gha" target="prod_jobs"><mxGeometry relative="1" as="geometry"/></mxCell>
+        <mxCell id="pm2" style="edgeStyle=orthogonalEdgeStyle;endArrow=open;dashed=1;" edge="1" parent="1" source="prod_jobs" target="prod_db"><mxGeometry relative="1" as="geometry"/></mxCell>
+
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>
