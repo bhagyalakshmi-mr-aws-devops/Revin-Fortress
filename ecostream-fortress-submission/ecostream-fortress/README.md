@@ -114,6 +114,8 @@ This removes the need for SSH-based deployments and eliminates manual risk.
 - Amazon CloudWatch for metrics and alarms
 - Kubernetes metrics for autoscaling
 - Alerting configured to notify before customer impact occurs
+- For HPA (CPU / Memory auto-scaling) → install Metrics Server
+- For Cluster / object monitoring (Prometheus dashboards) → install kube-state-metrics
 
 This creates a feedback loop that enables proactive issue detection.
 
