@@ -1,9 +1,25 @@
-terraform {
-  required_providers { aws = { source = "hashicorp/aws", version = ">= 5.0" } }
+resource "aws_eks_cluster" "this" {
+  name     = var.cluster_name
+  role_arn = var.cluster_role_arn
+
+  vpc_config {
+    subnet_ids = var.private_subnet_ids
+  }
+
+  depends_on = [var.cluster_role_arn]
 }
 
-# Creates: EKS control plane, managed node groups, cluster SGs, OIDC provider for IRSA.
-# Recommended: private endpoint + restricted public access.
+resource "aws_eks_node_group" "this" {
+  cluster_name    = aws_eks_cluster.this.name
+  node_group_name = "${var.cluster_name}-nodes"
+  node_role_arn   = var.node_role_arn
+  subnet_ids      = var.private_subnet_ids
 
-output "cluster_name"     { value = "REPLACE_WITH_CLUSTER_NAME" }
-output "cluster_endpoint" { value = "REPLACE_WITH_CLUSTER_ENDPOINT" }
+  scaling_config {
+    desired_size = 2
+    max_size     = 3
+    min_size     = 1
+  }
+
+  instance_types = ["t3.medium"]
+}
