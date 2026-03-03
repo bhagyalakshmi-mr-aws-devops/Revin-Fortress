@@ -2,43 +2,36 @@
 # - IAM policy for controller
 # - IRSA service account
 # - (Helm install can be done via GitOps or pipeline)
-resource "aws_vpc" "this" {
-  cidr_block           = var.vpc_cidr
-  enable_dns_support   = true
-  enable_dns_hostnames = true
+resource "aws_lb" "this" {
+  name               = var.name
+  internal           = false
+  load_balancer_type = "application"
+  subnets            = var.public_subnet_ids
+  security_groups    = [var.security_group_id]
 
   tags = {
     Name = var.name
   }
 }
 
-resource "aws_internet_gateway" "this" {
-  vpc_id = aws_vpc.this.id
+resource "aws_lb_target_group" "this" {
+  name     = "${var.name}-tg"
+  port     = 80
+  protocol = "HTTP"
+  vpc_id   = var.vpc_id
 
-  tags = {
-    Name = "${var.name}-igw"
+  health_check {
+    path = "/"
   }
 }
 
-resource "aws_subnet" "public" {
-  count                   = length(var.public_subnets)
-  vpc_id                  = aws_vpc.this.id
-  cidr_block              = var.public_subnets[count.index]
-  map_public_ip_on_launch = true
-  availability_zone       = var.azs[count.index]
+resource "aws_lb_listener" "http" {
+  load_balancer_arn = aws_lb.this.arn
+  port              = 80
+  protocol          = "HTTP"
 
-  tags = {
-    Name = "${var.name}-public-${count.index}"
-  }
-}
-
-resource "aws_subnet" "private" {
-  count             = length(var.private_subnets)
-  vpc_id            = aws_vpc.this.id
-  cidr_block        = var.private_subnets[count.index]
-  availability_zone = var.azs[count.index]
-
-  tags = {
-    Name = "${var.name}-private-${count.index}"
+  default_action {
+    type             = "forward"
+    target_group_arn = aws_lb_target_group.this.arn
   }
 }
